@@ -14,119 +14,119 @@ String moviePopularModelToJson(MoviePopularModel data) =>
 
 class MoviePopularModel extends MoviePopular {
   const MoviePopularModel({
-    required this.page,
-    required this.results,
-    required this.totalPages,
-    required this.totalResults,
+    required this.newPage,
+    required this.newResults,
+    required this.newTotalPages,
+    required this.newTotalResults,
   }) : super(
-          page: page,
-          results: results,
-          totalPages: totalPages,
-          totalResults: totalResults,
+          page: newPage ?? 0,
+          results: newResults,
+          totalPages: newTotalPages,
+          totalResults: newTotalResults,
         );
 
-  final int page;
-  final List<ResultModel> results;
-  final int totalPages;
-  final int totalResults;
+  final int? newPage;
+  final List<ResultModel> newResults;
+  final int newTotalPages;
+  final int newTotalResults;
 
   factory MoviePopularModel.fromJson(Map<String, dynamic> json) =>
       MoviePopularModel(
-        page: json["page"],
-        results: List<ResultModel>.from(
+        newPage: json["page"],
+        newResults: List<ResultModel>.from(
             json["results"].map((x) => ResultModel.fromJson(x))),
-        totalPages: json["total_pages"],
-        totalResults: json["total_results"],
+        newTotalPages: json["total_pages"],
+        newTotalResults: json["total_results"],
       );
 
   Map<String, dynamic> toJson() => {
-        "page": page,
-        "results": List<dynamic>.from(results.map((x) => x.toJson())),
-        "total_pages": totalPages,
-        "total_results": totalResults,
+        "page": newPage,
+        "results": List<dynamic>.from(newResults.map((x) => x.toJson())),
+        "total_pages": newTotalPages,
+        "total_results": newTotalResults,
       };
 }
 
 class ResultModel extends Result {
   const ResultModel({
-    required this.adult,
-    required this.backdropPath,
-    required this.genreIds,
-    required this.id,
-    required this.originalLanguage,
-    required this.originalTitle,
-    required this.overview,
-    required this.popularity,
-    required this.posterPath,
-    required this.releaseDate,
-    required this.title,
-    required this.video,
-    required this.voteAverage,
-    required this.voteCount,
+    required this.newAdult,
+    required this.newBackdropPath,
+    required this.newGenreIds,
+    required this.newId,
+    required this.newOriginalLanguage,
+    required this.newOriginalTitle,
+    required this.newOverview,
+    required this.newPopularity,
+    required this.newPosterPath,
+    required this.newReleaseDate,
+    required this.newTitle,
+    required this.newVideo,
+    required this.newVoteAverage,
+    required this.newVoteCount,
   }) : super(
-          adult: adult,
-          backdropPath: backdropPath,
-          genreIds: genreIds,
-          id: id,
-          originalLanguage: originalLanguage,
-          originalTitle: originalTitle,
-          overview: overview,
-          popularity: popularity,
-          posterPath: posterPath,
-          releaseDate: releaseDate,
-          title: title,
-          video: video,
-          voteAverage: voteAverage,
-          voteCount: voteCount,
+          adult: newAdult,
+          backdropPath: newBackdropPath,
+          genreIds: newGenreIds,
+          id: newId,
+          originalLanguage: newOriginalLanguage,
+          originalTitle: newOriginalTitle,
+          overview: newOverview,
+          popularity: newPopularity,
+          posterPath: newPosterPath,
+          releaseDate: newReleaseDate,
+          title: newTitle,
+          video: newVideo,
+          voteAverage: newVoteAverage,
+          voteCount: newVoteCount,
         );
 
-  final bool adult;
-  final String backdropPath;
-  final List<int> genreIds;
-  final int id;
-  final String originalLanguage;
-  final String originalTitle;
-  final String overview;
-  final double popularity;
-  final String posterPath;
-  final DateTime releaseDate;
-  final String title;
-  final bool video;
-  final double voteAverage;
-  final int voteCount;
+  final bool newAdult;
+  final String newBackdropPath;
+  final List<int> newGenreIds;
+  final int newId;
+  final String newOriginalLanguage;
+  final String newOriginalTitle;
+  final String newOverview;
+  final double newPopularity;
+  final String newPosterPath;
+  final DateTime newReleaseDate;
+  final String newTitle;
+  final bool newVideo;
+  final double newVoteAverage;
+  final int newVoteCount;
 
   factory ResultModel.fromJson(Map<String, dynamic> json) => ResultModel(
-        adult: json["adult"],
-        backdropPath: json["backdrop_path"],
-        genreIds: List<int>.from(json["genre_ids"].map((x) => x)),
-        id: json["id"],
-        originalLanguage: json["original_language"],
-        originalTitle: json["original_title"],
-        overview: json["overview"],
-        popularity: json["popularity"]?.toDouble(),
-        posterPath: json["poster_path"],
-        releaseDate: DateTime.parse(json["release_date"]),
-        title: json["title"],
-        video: json["video"],
-        voteAverage: json["vote_average"]?.toDouble(),
-        voteCount: json["vote_count"],
+        newAdult: json["adult"],
+        newBackdropPath: json["backdrop_path"],
+        newGenreIds: List<int>.from(json["genre_ids"].map((x) => x)),
+        newId: json["id"],
+        newOriginalLanguage: json["original_language"],
+        newOriginalTitle: json["original_title"],
+        newOverview: json["overview"],
+        newPopularity: json["popularity"]?.toDouble(),
+        newPosterPath: json["poster_path"],
+        newReleaseDate: DateTime.parse(json["release_date"]),
+        newTitle: json["title"],
+        newVideo: json["video"],
+        newVoteAverage: json["vote_average"]?.toDouble(),
+        newVoteCount: json["vote_count"],
       );
 
   Map<String, dynamic> toJson() => {
-        "adult": adult,
-        "backdrop_path": backdropPath,
+        "adult": newAdult,
+        "backdrop_path": newBackdropPath,
         "genre_ids": List<dynamic>.from(genreIds.map((x) => x)),
         "id": id,
-        "original_language": originalLanguage,
-        "original_title": originalTitle,
-        "overview": overview,
-        "popularity": popularity,
-        "poster_path": posterPath,
+        "original_language": newOriginalLanguage,
+        "original_title": newOriginalTitle,
+        "overview": newOverview,
+        "popularity": newPopularity,
+        "poster_path": newPosterPath,
         "release_date":
-            "${releaseDate.year.toString().padLeft(4, '0')}-${releaseDate.month.toString().padLeft(2, '0')}-${releaseDate.day.toString().padLeft(2, '0')}",
-        "title": title,
-        "video": video,
-        "vote_average": voteAverage,
-        "vote_count": voteCount,
+            "${newReleaseDate.year.toString().padLeft(4, '0')}-${newReleaseDate.month.toString().padLeft(2, '0')}-${newReleaseDate.day.toString().padLeft(2, '0')}",
+        "title": newTitle,
+        "video": newVideo,
+        "vote_average": newVoteAverage,
+        "vote_count": newVoteCount,
       };
 }
