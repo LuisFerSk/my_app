@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 
 import 'package:my_app/domain/entities/movie_popular.dart';
 import 'package:my_app/presentation/pages/home/widgets/drawer.dart';
+import 'package:my_app/presentation/pages/home/widgets/carousel.dart';
+import 'package:my_app/presentation/pages/home/widgets/movie_card.dart';
 import 'package:my_app/core/framework/colors.dart';
 
 class ScaffoldWidget extends StatelessWidget {
-  final MoviePopular moviePopular;
+  final MoviePopular moviesPopular;
 
   const ScaffoldWidget({
     super.key,
-    required this.moviePopular,
+    required this.moviesPopular,
   });
 
   @override
@@ -24,32 +25,38 @@ class ScaffoldWidget extends StatelessWidget {
           child: Image.asset('assets/logo.png', fit: BoxFit.cover),
         ),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          CarouselSlider(
-            options: CarouselOptions(
-              height: 300,
-              viewportFraction: 1.1,
-              autoPlay: true,
-            ),
-            items: moviePopular.results.map((item) {
-              return Builder(
-                builder: (BuildContext context) {
-                  return SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    child: Stack(children: [
-                      Image.network(
-                        'https://image.tmdb.org/t/p/w185${item.posterPath}',
-                      ),
-                      Text(item.title)
-                    ]),
-                  );
-                },
-              );
-            }).toList(),
-          )
-        ],
+      body: SafeArea(
+        child: Container(
+          color: backgroundSecondary,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              CarouselSliderWidget(moviesPopular: moviesPopular),
+              Container(
+                padding: const EdgeInsets.all(10),
+                child: const Text(
+                  'Populares',
+                  style: TextStyle(
+                    color: white,
+                    fontFamily: 'Mplus 1p Black',
+                    fontSize: 20,
+                  ),
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.all(10),
+                height: 200,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: moviesPopular.results.map((item) {
+                    return MovieCard(movie: item);
+                  }).toList(),
+                ),
+              )
+            ],
+          ),
+        ),
       ),
     );
   }

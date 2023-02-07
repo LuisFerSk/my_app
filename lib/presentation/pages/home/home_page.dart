@@ -41,9 +41,9 @@ class _HomePageState extends State<HomePage> {
     }
 
     if (state is MoviePopularLoaded) {
-      final moviePopular = state.moviePopular;
+      final moviesPopular = state.moviePopular;
 
-      return ScaffoldWidget(moviePopular: moviePopular);
+      return ScaffoldWidget(moviesPopular: moviesPopular);
     }
 
     if (state is MoviePopularError) {

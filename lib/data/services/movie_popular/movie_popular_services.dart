@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:my_app/core/errors/exceptions.dart';
 import 'package:my_app/data/models/movie_popular_module.dart';
