@@ -29,7 +29,10 @@ class _ScaffoldWidgetState extends State<ScaffoldWidget> {
               image: NetworkImage(getUrlImage(widget.movieDetail.posterPath)),
             ),
           ),
-          child: Text(widget.movieDetail.toString()),
+          child: SizedBox(
+            width: double.infinity,
+            child: Text(widget.movieDetail.toString()),
+          ),
         ),
       ),
     );

@@ -9,9 +9,6 @@ import 'package:my_app/domain/entities/movie_popular.dart';
 MoviePopularModel moviePopularModelFromJson(String str) =>
     MoviePopularModel.fromJson(json.decode(str));
 
-String moviePopularModelToJson(MoviePopularModel data) =>
-    json.encode(data.toJson());
-
 class MoviePopularModel extends MoviePopular {
   const MoviePopularModel({
     required this.newPage,
@@ -38,13 +35,6 @@ class MoviePopularModel extends MoviePopular {
         newTotalPages: json["total_pages"],
         newTotalResults: json["total_results"],
       );
-
-  Map<String, dynamic> toJson() => {
-        "page": newPage,
-        "results": List<dynamic>.from(newResults.map((x) => x.toJson())),
-        "total_pages": newTotalPages,
-        "total_results": newTotalResults,
-      };
 }
 
 class ResultModel extends Result {
@@ -65,14 +55,14 @@ class ResultModel extends Result {
     required this.newVoteCount,
   }) : super(
           adult: newAdult,
-          backdropPath: newBackdropPath,
+          backdropPath: newBackdropPath ?? '',
           genreIds: newGenreIds,
           id: newId,
           originalLanguage: newOriginalLanguage,
           originalTitle: newOriginalTitle,
           overview: newOverview,
           popularity: newPopularity,
-          posterPath: newPosterPath,
+          posterPath: newPosterPath ?? '',
           releaseDate: newReleaseDate,
           title: newTitle,
           video: newVideo,
@@ -81,14 +71,14 @@ class ResultModel extends Result {
         );
 
   final bool newAdult;
-  final String newBackdropPath;
+  final String? newBackdropPath;
   final List<int> newGenreIds;
   final int newId;
   final String newOriginalLanguage;
   final String newOriginalTitle;
   final String newOverview;
   final double newPopularity;
-  final String newPosterPath;
+  final String? newPosterPath;
   final DateTime newReleaseDate;
   final String newTitle;
   final bool newVideo;
@@ -97,36 +87,18 @@ class ResultModel extends Result {
 
   factory ResultModel.fromJson(Map<String, dynamic> json) => ResultModel(
         newAdult: json["adult"],
-        newBackdropPath: json["backdrop_path"],
+        newBackdropPath: json["backdrop_path"] as String?,
         newGenreIds: List<int>.from(json["genre_ids"].map((x) => x)),
         newId: json["id"],
         newOriginalLanguage: json["original_language"],
         newOriginalTitle: json["original_title"],
         newOverview: json["overview"],
         newPopularity: json["popularity"]?.toDouble(),
-        newPosterPath: json["poster_path"],
+        newPosterPath: json["poster_path"] as String?,
         newReleaseDate: DateTime.parse(json["release_date"]),
         newTitle: json["title"],
         newVideo: json["video"],
         newVoteAverage: json["vote_average"]?.toDouble(),
         newVoteCount: json["vote_count"],
       );
-
-  Map<String, dynamic> toJson() => {
-        "adult": newAdult,
-        "backdrop_path": newBackdropPath,
-        "genre_ids": List<dynamic>.from(genreIds.map((x) => x)),
-        "id": id,
-        "original_language": newOriginalLanguage,
-        "original_title": newOriginalTitle,
-        "overview": newOverview,
-        "popularity": newPopularity,
-        "poster_path": newPosterPath,
-        "release_date":
-            "${newReleaseDate.year.toString().padLeft(4, '0')}-${newReleaseDate.month.toString().padLeft(2, '0')}-${newReleaseDate.day.toString().padLeft(2, '0')}",
-        "title": newTitle,
-        "video": newVideo,
-        "vote_average": newVoteAverage,
-        "vote_count": newVoteCount,
-      };
 }
