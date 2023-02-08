@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:my_app/domain/entities/movie_popular.dart';
-import 'package:my_app/presentation/pages/home/widgets/drawer.dart';
 import 'package:my_app/core/framework/colors.dart';
 import 'package:my_app/core/framework/font.dart';
 import 'package:my_app/presentation/pages/home/widgets/movie_card.dart';
