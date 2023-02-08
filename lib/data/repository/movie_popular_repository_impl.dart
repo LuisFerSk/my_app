@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:my_app/core/errors/exceptions.dart';
 import 'package:my_app/core/errors/failure.dart';
-import 'package:my_app/data/services/movie_popular/movie_popular_services.dart';
+import 'package:my_app/data/services/movie_popular/movie_popular_service.dart';
 import 'package:my_app/domain/entities/movie_popular.dart';
 import 'package:my_app/domain/repositories/movie_popular_repository.dart';
 
