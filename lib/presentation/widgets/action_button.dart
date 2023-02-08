@@ -21,9 +21,10 @@ class ActionButton extends StatelessWidget {
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(100),
-          color: isInverted ? secondary : Colors.white,
+          color: isInverted ? ColorsTheme.secondary : Colors.white,
         ),
-        child: Icon(icon, color: isInverted ? Colors.white : secondary),
+        child: Icon(icon,
+            color: isInverted ? Colors.white : ColorsTheme.secondary),
       ),
     );
   }

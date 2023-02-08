@@ -23,14 +23,12 @@ class _ScaffoldWidgetState extends State<ScaffoldWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const DrawerWidget(),
       appBar: appBar(context),
       body: SafeArea(
         child: Container(
-          color: backgroundSecondary,
+          color: ColorsTheme.backgroundSecondary,
           child: ListView(
             children: [
-              MovieCardSection(moviesPopular: widget.moviesPopular),
               MovieCardSection(moviesPopular: widget.moviesPopular),
             ],
           ),
@@ -56,13 +54,9 @@ class MovieCardSection extends StatelessWidget {
       children: <Widget>[
         Container(
           padding: const EdgeInsets.all(20),
-          child: const Text(
-            'Populares',
-            style: TextStyle(
-              color: white,
-              fontFamily: fontFamily,
-              fontSize: 20,
-            ),
+          child: Text(
+            'Popular',
+            style: FontTheme.subtitle,
           ),
         ),
         Container(

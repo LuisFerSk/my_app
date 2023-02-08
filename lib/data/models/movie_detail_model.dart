@@ -146,21 +146,21 @@ class BelongsToCollectionModel extends BelongsToCollection {
   }) : super(
           id: newId,
           name: newName,
-          posterPath: newPosterPath,
-          backdropPath: newBackdropPath,
+          posterPath: newPosterPath ?? '',
+          backdropPath: newBackdropPath ?? '',
         );
 
   final int newId;
   final String newName;
-  final String newPosterPath;
-  final String newBackdropPath;
+  final String? newPosterPath;
+  final String? newBackdropPath;
 
   factory BelongsToCollectionModel.fromJson(Map<String, dynamic> json) =>
       BelongsToCollectionModel(
         newId: json["id"],
         newName: json["name"],
-        newPosterPath: json["poster_path"],
-        newBackdropPath: json["backdrop_path"],
+        newPosterPath: json["poster_path"] as String?,
+        newBackdropPath: json["backdrop_path"] as String?,
       );
 }
 

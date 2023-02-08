@@ -14,27 +14,27 @@ class _DrawerWidgetState extends State<DrawerWidget> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: background,
+      backgroundColor: ColorsTheme.background,
       child: ListView(
         // Important: Remove any padding from the ListView.
         padding: EdgeInsets.zero,
         children: [
           const DrawerHeader(
             decoration: BoxDecoration(
-              color: background,
+              color: ColorsTheme.background,
             ),
             child: Text(
               'Drawer Header',
-              style: TextStyle(color: fontColorPrimary),
+              style: TextStyle(color: ColorsTheme.fontColorPrimary),
             ),
           ),
           ListTile(
             title: Row(
               children: const [
-                Icon(Icons.home, color: fontColorPrimary),
+                Icon(Icons.home, color: ColorsTheme.fontColorPrimary),
                 Text(
                   'PelisLa',
-                  style: TextStyle(color: fontColorPrimary),
+                  style: TextStyle(color: ColorsTheme.fontColorPrimary),
                 ),
               ],
             ),
@@ -46,10 +46,10 @@ class _DrawerWidgetState extends State<DrawerWidget> {
           ListTile(
             title: Row(
               children: const [
-                Icon(Icons.star, color: fontColorPrimary),
+                Icon(Icons.star, color: ColorsTheme.fontColorPrimary),
                 Text(
                   'Populares',
-                  style: TextStyle(color: fontColorPrimary),
+                  style: TextStyle(color: ColorsTheme.fontColorPrimary),
                 ),
               ],
             ),
