@@ -39,13 +39,8 @@ class MovieDetailModel extends MovieDetail {
   }) : super(
           adult: newAdult,
           backdropPath: newBackdropPath ?? '',
-          belongsToCollection: newBelongsToCollection ??
-              const BelongsToCollectionModel(
-                newBackdropPath: '',
-                newId: -1,
-                newName: '',
-                newPosterPath: '',
-              ),
+          belongsToCollection:
+              newBelongsToCollection ?? const BelongsToCollectionModel(),
           budget: newBudget,
           genres: newGenres,
           homepage: newHomepage ?? '',
@@ -139,19 +134,19 @@ class MovieDetailModel extends MovieDetail {
 
 class BelongsToCollectionModel extends BelongsToCollection {
   const BelongsToCollectionModel({
-    required this.newId,
-    required this.newName,
-    required this.newPosterPath,
-    required this.newBackdropPath,
+    this.newId,
+    this.newName,
+    this.newPosterPath,
+    this.newBackdropPath,
   }) : super(
-          id: newId,
-          name: newName,
+          id: newId ?? -1,
+          name: newName ?? '',
           posterPath: newPosterPath ?? '',
           backdropPath: newBackdropPath ?? '',
         );
 
-  final int newId;
-  final String newName;
+  final int? newId;
+  final String? newName;
   final String? newPosterPath;
   final String? newBackdropPath;
 
