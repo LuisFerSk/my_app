@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injector/injector.dart';
 
-import 'package:my_app/presentation/cubit/movie_popular/movie_popular_cubit.dart';
-import 'package:my_app/di/injection_container.dart';
+import 'package:my_app/presentation/bloc/movie_popular/movie_popular_bloc.dart';
 import 'package:my_app/presentation/widgets/error_message.dart';
 import 'package:my_app/presentation/widgets/loading_indicator.dart';
 import 'package:my_app/presentation/pages/home/widgets/scaffol.dart';
@@ -18,8 +18,8 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => setupLocator<MoviePopularCubit>(),
-      child: BlocBuilder<MoviePopularCubit, MoviePopularState>(
+      create: (_) => Injector.appInstance.get<MoviePopularBloc>(),
+      child: BlocBuilder<MoviePopularBloc, MoviePopularState>(
         builder: (context, state) {
           return _buildContentFromState(context, state);
         },
@@ -31,12 +31,8 @@ class _HomePageState extends State<HomePage> {
     BuildContext context,
     MoviePopularState state,
   ) {
-    if (state is MoviePopularInitial) {
-      _getMoviePopular(context);
-      return const LoadingIndicator();
-    }
-
     if (state is MoviePopularLoading) {
+      _getMoviePopular(context);
       return const LoadingIndicator();
     }
 
@@ -59,7 +55,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _getMoviePopular(BuildContext context) {
-    final moviePopularCubit = context.read<MoviePopularCubit>();
-    moviePopularCubit.getNewMoviePopular();
+    final moviePopularBloc = context.read<MoviePopularBloc>();
+    moviePopularBloc.add(GetNewMoviePopular());
   }
 }

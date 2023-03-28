@@ -4,7 +4,7 @@ import 'package:my_app/core/framework/font.dart';
 import 'package:my_app/domain/entities/movie_detail.dart';
 import 'package:my_app/presentation/widgets/appbar.dart';
 import 'package:my_app/util/url.dart';
-import 'package:my_app/util/status_movie.dart';
+import 'package:intl/intl.dart';
 
 class ScaffoldWidget extends StatefulWidget {
   const ScaffoldWidget({
@@ -21,6 +21,8 @@ class ScaffoldWidget extends StatefulWidget {
 class _ScaffoldWidgetState extends State<ScaffoldWidget> {
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: appBar(context),
       body: SafeArea(
@@ -38,49 +40,73 @@ class _ScaffoldWidgetState extends State<ScaffoldWidget> {
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.bottomRight,
-                  stops: const [0.5, 0.9],
+                  stops: const [0.5, 1],
                   colors: [
-                    Colors.black.withOpacity(.9),
-                    Colors.black.withOpacity(.1),
+                    Colors.black.withOpacity(1),
+                    Colors.black.withOpacity(.2),
                   ],
                 ),
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
+                  SizedBox(height: size.height * 0.03),
                   Container(
-                    padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: size.width * 0.05),
                     alignment: Alignment.centerLeft,
                     child: Text(
                       widget.movieDetail.title,
                       style: FontTheme.title,
                     ),
                   ),
+                  SizedBox(height: size.height * 0.02),
                   Container(
                     alignment: Alignment.centerLeft,
                     padding:
-                        const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        color: ColorsTheme.secondary,
-                      ),
-                      child: Container(
-                        padding: const EdgeInsets.all(5),
-                        child: Text(
-                          widget.movieDetail.status,
-                          style: FontTheme.body,
+                        EdgeInsets.symmetric(horizontal: size.width * 0.05),
+                    child: Row(children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: ColorsTheme.secondary,
+                        ),
+                        child: Container(
+                          padding: const EdgeInsets.all(5),
+                          child: Text(
+                            widget.movieDetail.status,
+                            style: FontTheme.bodyBold,
+                          ),
                         ),
                       ),
+                      SizedBox(width: size.width * 0.03),
+                      Text(
+                        DateFormat.yMMMd()
+                            .format(widget.movieDetail.releaseDate),
+                        style: FontTheme.body,
+                      ),
+                    ]),
+                  ),
+                  SizedBox(height: size.height * 0.02),
+                  Container(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: size.width * 0.05),
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      '${widget.movieDetail.voteAverage.roundToDouble().truncate()}/10',
+                      style: FontTheme.body2,
                     ),
                   ),
+                  SizedBox(height: size.height * 0.02),
                   Container(
-                    padding: const EdgeInsets.all(20),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: size.width * 0.05),
                     child: Text(
                       widget.movieDetail.overview,
                       style: FontTheme.body2,
                     ),
                   ),
+                  SizedBox(height: size.height * 0.02),
                 ],
               ),
             ),

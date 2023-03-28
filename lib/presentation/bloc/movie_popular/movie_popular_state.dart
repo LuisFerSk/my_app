@@ -1,4 +1,4 @@
-part of 'movie_popular_cubit.dart';
+part of 'movie_popular_bloc.dart';
 
 abstract class MoviePopularState extends Equatable {
   const MoviePopularState();
@@ -6,8 +6,6 @@ abstract class MoviePopularState extends Equatable {
   @override
   List<Object> get props => [];
 }
-
-class MoviePopularInitial extends MoviePopularState {}
 
 class MoviePopularLoading extends MoviePopularState {}
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_app/di/injection_container.dart';
-import 'package:my_app/presentation/cubit/movie_detail/movie_detail_cubit.dart';
+import 'package:injector/injector.dart';
+import 'package:my_app/presentation/bloc/movie_detail/movie_detail_bloc.dart';
 import 'package:my_app/presentation/pages/movie/widgets/scaffol.dart';
 import 'package:my_app/presentation/widgets/error_message.dart';
 import 'package:my_app/presentation/widgets/loading_indicator.dart';
@@ -19,8 +19,8 @@ class _MoviePageState extends State<MoviePage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => setupLocator<MovieDetailCubit>(),
-      child: BlocBuilder<MovieDetailCubit, MovieDetailState>(
+      create: (_) => Injector.appInstance.get<MovieDetailBloc>(),
+      child: BlocBuilder<MovieDetailBloc, MovieDetailState>(
         builder: (context, state) {
           return _buildContentFromState(context, state);
         },
@@ -32,12 +32,9 @@ class _MoviePageState extends State<MoviePage> {
     BuildContext context,
     MovieDetailState state,
   ) {
-    if (state is MovieDetailInitial) {
-      _getMovieDetail(context);
-      return const LoadingIndicator();
-    }
-
     if (state is MovieDetailLoading) {
+      _getMovieDetail(context);
+
       return const LoadingIndicator();
     }
 
@@ -60,7 +57,7 @@ class _MoviePageState extends State<MoviePage> {
   }
 
   void _getMovieDetail(BuildContext context) {
-    final movieDetailCubit = context.read<MovieDetailCubit>();
-    movieDetailCubit.getNewMovieDetail(widget.id);
+    final movieDetailBloc = context.read<MovieDetailBloc>();
+    movieDetailBloc.add(GetNewMovieDetail(widget.id));
   }
 }

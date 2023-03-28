@@ -9,6 +9,13 @@ class FontTheme {
         color: Colors.white60,
       );
 
+  static TextStyle get bodyBold => const TextStyle(
+        fontFamily: fontFamily,
+        fontSize: 15,
+        color: Colors.white60,
+        fontWeight: FontWeight.bold,
+      );
+
   static TextStyle get body2 => const TextStyle(
         fontFamily: fontFamily,
         fontSize: 18,

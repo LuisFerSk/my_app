@@ -50,7 +50,7 @@ class MovieCardSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
-      children: <Widget>[
+      children: [
         Container(
           padding: const EdgeInsets.all(20),
           child: Text(
@@ -60,7 +60,7 @@ class MovieCardSection extends StatelessWidget {
         ),
         Container(
           margin: const EdgeInsets.symmetric(horizontal: 20),
-          height: 200,
+          height: 250,
           child: ListView(
             scrollDirection: Axis.horizontal,
             children: moviesPopular.results.map((item) {

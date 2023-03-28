@@ -1,32 +1,32 @@
 import 'dart:convert';
 
-import 'package:my_app/domain/entities/movie_popular.dart';
+import 'package:my_app/domain/entities/movie_top_rated.dart';
 
-MoviePopularModel moviePopularModelFromJson(String str) =>
-    MoviePopularModel.fromJson(json.decode(str));
+MovieTopRatedModel movieTopRatedModelFromJson(String str) =>
+    MovieTopRatedModel.fromJson(json.decode(str));
 
-class MoviePopularModel extends MoviePopular {
-  const MoviePopularModel({
+class MovieTopRatedModel extends MovieTopRated {
+  const MovieTopRatedModel({
     required this.newPage,
     required this.newResults,
     required this.newTotalPages,
     required this.newTotalResults,
   }) : super(
-          page: newPage ?? 0,
+          page: newPage,
           results: newResults,
           totalPages: newTotalPages,
           totalResults: newTotalResults,
         );
 
-  final int? newPage;
-  final List<ResultModel> newResults;
+  final int newPage;
+  final List<Result> newResults;
   final int newTotalPages;
   final int newTotalResults;
 
-  factory MoviePopularModel.fromJson(Map<String, dynamic> json) =>
-      MoviePopularModel(
+  factory MovieTopRatedModel.fromJson(Map<String, dynamic> json) =>
+      MovieTopRatedModel(
         newPage: json["page"],
-        newResults: List<ResultModel>.from(
+        newResults: List<Result>.from(
             json["results"].map((x) => ResultModel.fromJson(x))),
         newTotalPages: json["total_pages"],
         newTotalResults: json["total_results"],
@@ -83,14 +83,14 @@ class ResultModel extends Result {
 
   factory ResultModel.fromJson(Map<String, dynamic> json) => ResultModel(
         newAdult: json["adult"],
-        newBackdropPath: json["backdrop_path"] as String?,
+        newBackdropPath: json["backdrop_path"],
         newGenreIds: List<int>.from(json["genre_ids"].map((x) => x)),
         newId: json["id"],
         newOriginalLanguage: json["original_language"],
         newOriginalTitle: json["original_title"],
         newOverview: json["overview"],
         newPopularity: json["popularity"]?.toDouble(),
-        newPosterPath: json["poster_path"] as String?,
+        newPosterPath: json["poster_path"],
         newReleaseDate: DateTime.parse(json["release_date"]),
         newTitle: json["title"],
         newVideo: json["video"],

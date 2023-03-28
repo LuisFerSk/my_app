@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final movieDetail = movieDetailFromJson(jsonString);
-
 import 'dart:convert';
 
 import 'package:my_app/domain/entities/movie_detail.dart';
@@ -225,22 +221,18 @@ class ProductionCountryModel extends ProductionCountry {
 
 class SpokenLanguageModel extends SpokenLanguage {
   const SpokenLanguageModel({
-    required this.newEnglishName,
     required this.newIso6391,
     required this.newName,
   }) : super(
-          englishName: newEnglishName,
           iso6391: newIso6391,
           name: newName,
         );
 
-  final String newEnglishName;
   final String newIso6391;
   final String newName;
 
   factory SpokenLanguageModel.fromJson(Map<String, dynamic> json) =>
       SpokenLanguageModel(
-        newEnglishName: json["english_name"],
         newIso6391: json["iso_639_1"],
         newName: json["name"],
       );

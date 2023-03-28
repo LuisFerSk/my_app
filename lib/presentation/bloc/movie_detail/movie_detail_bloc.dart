@@ -1,23 +1,25 @@
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-import 'package:my_app/domain/entities/movie_detail.dart';
+
 import 'package:my_app/core/errors/failure.dart';
+import 'package:my_app/domain/entities/movie_detail.dart';
 import 'package:my_app/domain/usecases/get_movie_detail.dart';
 
+part 'movie_detail_event.dart';
 part 'movie_detail_state.dart';
 
-class MovieDetailCubit extends Cubit<MovieDetailState> {
+class MovieDetailBloc extends Bloc<MovieDetailEvent, MovieDetailState> {
   final GetMovieDetail getMovieDetail;
 
-  MovieDetailCubit(this.getMovieDetail) : super(MovieDetailInitial());
+  MovieDetailBloc(this.getMovieDetail) : super(MovieDetailLoading()) {
+    on<GetNewMovieDetail>((event, emit) async {
+      emit(MovieDetailLoading());
 
-  void getNewMovieDetail(int id) async {
-    emit(MovieDetailLoading());
+      final failureOrMoviePopular = await getMovieDetail(event.id);
 
-    final failureOrMoviePopular = await getMovieDetail(id);
-
-    emit(_failureOrMovieDetail(failureOrMoviePopular));
+      emit(_failureOrMovieDetail(failureOrMoviePopular));
+    });
   }
 
   MovieDetailState _failureOrMovieDetail(

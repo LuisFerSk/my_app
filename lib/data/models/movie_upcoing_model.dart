@@ -1,35 +1,57 @@
 import 'dart:convert';
 
-import 'package:my_app/domain/entities/movie_popular.dart';
+import 'package:my_app/domain/entities/movie_upcoming.dart';
 
-MoviePopularModel moviePopularModelFromJson(String str) =>
-    MoviePopularModel.fromJson(json.decode(str));
+MovieUpcomingModel movieUpcomingModelFromJson(String str) =>
+    MovieUpcomingModel.fromJson(json.decode(str));
 
-class MoviePopularModel extends MoviePopular {
-  const MoviePopularModel({
+class MovieUpcomingModel extends MovieUpcoming {
+  const MovieUpcomingModel({
+    required this.newDates,
     required this.newPage,
     required this.newResults,
     required this.newTotalPages,
     required this.newTotalResults,
   }) : super(
-          page: newPage ?? 0,
+          dates: newDates,
+          page: newPage,
           results: newResults,
           totalPages: newTotalPages,
           totalResults: newTotalResults,
         );
 
-  final int? newPage;
+  final DatesModel newDates;
+  final int newPage;
   final List<ResultModel> newResults;
   final int newTotalPages;
   final int newTotalResults;
 
-  factory MoviePopularModel.fromJson(Map<String, dynamic> json) =>
-      MoviePopularModel(
+  factory MovieUpcomingModel.fromJson(Map<String, dynamic> json) =>
+      MovieUpcomingModel(
+        newDates: DatesModel.fromJson(json["dates"]),
         newPage: json["page"],
         newResults: List<ResultModel>.from(
             json["results"].map((x) => ResultModel.fromJson(x))),
         newTotalPages: json["total_pages"],
         newTotalResults: json["total_results"],
+      );
+}
+
+class DatesModel extends Dates {
+  const DatesModel({
+    required this.newMaximum,
+    required this.newMinimum,
+  }) : super(
+          maximum: newMaximum,
+          minimum: newMinimum,
+        );
+
+  final DateTime newMaximum;
+  final DateTime newMinimum;
+
+  factory DatesModel.fromJson(Map<String, dynamic> json) => DatesModel(
+        newMaximum: DateTime.parse(json["maximum"]),
+        newMinimum: DateTime.parse(json["minimum"]),
       );
 }
 
@@ -83,14 +105,14 @@ class ResultModel extends Result {
 
   factory ResultModel.fromJson(Map<String, dynamic> json) => ResultModel(
         newAdult: json["adult"],
-        newBackdropPath: json["backdrop_path"] as String?,
+        newBackdropPath: json["backdrop_path"],
         newGenreIds: List<int>.from(json["genre_ids"].map((x) => x)),
         newId: json["id"],
         newOriginalLanguage: json["original_language"],
         newOriginalTitle: json["original_title"],
         newOverview: json["overview"],
         newPopularity: json["popularity"]?.toDouble(),
-        newPosterPath: json["poster_path"] as String?,
+        newPosterPath: json["poster_path"],
         newReleaseDate: DateTime.parse(json["release_date"]),
         newTitle: json["title"],
         newVideo: json["video"],

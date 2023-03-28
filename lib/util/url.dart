@@ -1,5 +1,5 @@
 String getUrlImage(String path) {
-  return 'https://image.tmdb.org/t/p/w185$path';
+  return 'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/$path';
 }
 
 String getUrl(String path) {

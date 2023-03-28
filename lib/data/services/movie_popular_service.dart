@@ -3,11 +3,11 @@ import 'package:my_app/core/errors/exceptions.dart';
 import 'package:my_app/data/models/movie_popular_model.dart';
 import 'package:my_app/util/url.dart';
 
-abstract class AbstractMoviePopularService {
+abstract class MoviePopularServiceType {
   Future<MoviePopularModel> requestMoviePopular();
 }
 
-class MoviePopularService implements AbstractMoviePopularService {
+class MoviePopularService implements MoviePopularServiceType {
   final http.Client client;
 
   MoviePopularService(this.client);

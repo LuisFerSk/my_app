@@ -1,4 +1,4 @@
-part of 'movie_detail_cubit.dart';
+part of 'movie_detail_bloc.dart';
 
 abstract class MovieDetailState extends Equatable {
   const MovieDetailState();
@@ -6,8 +6,6 @@ abstract class MovieDetailState extends Equatable {
   @override
   List<Object> get props => [];
 }
-
-class MovieDetailInitial extends MovieDetailState {}
 
 class MovieDetailLoading extends MovieDetailState {}
 
