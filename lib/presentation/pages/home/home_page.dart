@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injector/injector.dart';
 
+import 'package:my_app/core/framework/colors.dart';
 import 'package:my_app/presentation/bloc/movie_popular/movie_popular_bloc.dart';
-import 'package:my_app/presentation/widgets/error_message.dart';
-import 'package:my_app/presentation/widgets/loading_indicator.dart';
-import 'package:my_app/presentation/pages/home/widgets/scaffol.dart';
+import 'package:my_app/presentation/bloc/movie_top_rated/movie_top_rated_bloc.dart';
+import 'package:my_app/presentation/bloc/movie_upcoming/movie_upcoming_bloc.dart';
+import 'package:my_app/presentation/pages/home/widgets/movie_popular.dart';
+import 'package:my_app/presentation/pages/home/widgets/movie_upcoming.dart';
+import 'package:my_app/presentation/pages/home/widgets/movie_top_rated.dart';
+import 'package:my_app/presentation/widgets/appbar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -17,45 +21,35 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => Injector.appInstance.get<MoviePopularBloc>(),
-      child: BlocBuilder<MoviePopularBloc, MoviePopularState>(
-        builder: (context, state) {
-          return _buildContentFromState(context, state);
-        },
+    final injector = Injector.appInstance;
+
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => injector.get<MoviePopularBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => injector.get<MovieUpcomingBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => injector.get<MovieTopRatedBloc>(),
+        ),
+      ],
+      child: Scaffold(
+        appBar: appBar(context),
+        body: SafeArea(
+          child: Container(
+            color: ColorsTheme.backgroundSecondary,
+            child: ListView(
+              children: const [
+                MoviePopularWidget(),
+                MovieUpcomingWidget(),
+                MovieTopRatedWidget(),
+              ],
+            ),
+          ),
+        ),
       ),
     );
-  }
-
-  Widget _buildContentFromState(
-    BuildContext context,
-    MoviePopularState state,
-  ) {
-    if (state is MoviePopularLoading) {
-      _getMoviePopular(context);
-      return const LoadingIndicator();
-    }
-
-    if (state is MoviePopularLoaded) {
-      final moviesPopular = state.moviePopular;
-
-      return ScaffoldWidget(moviesPopular: moviesPopular);
-    }
-
-    if (state is MoviePopularError) {
-      return ErrorMessage(
-        message: state.message,
-        onPressed: () => _getMoviePopular(context),
-      );
-    }
-
-    return const Center(
-      child: Text('Error'),
-    );
-  }
-
-  void _getMoviePopular(BuildContext context) {
-    final moviePopularBloc = context.read<MoviePopularBloc>();
-    moviePopularBloc.add(GetNewMoviePopular());
   }
 }

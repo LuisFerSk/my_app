@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injector/injector.dart';
+
 import 'package:my_app/presentation/bloc/movie_detail/movie_detail_bloc.dart';
 import 'package:my_app/presentation/pages/movie/widgets/scaffol.dart';
 import 'package:my_app/presentation/widgets/error_message.dart';

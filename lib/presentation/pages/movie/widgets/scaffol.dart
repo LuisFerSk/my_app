@@ -40,7 +40,7 @@ class _ScaffoldWidgetState extends State<ScaffoldWidget> {
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.bottomRight,
-                  stops: const [0.5, 1],
+                  stops: const [0.4, 0.9],
                   colors: [
                     Colors.black.withOpacity(1),
                     Colors.black.withOpacity(.2),
@@ -93,7 +93,7 @@ class _ScaffoldWidgetState extends State<ScaffoldWidget> {
                         EdgeInsets.symmetric(horizontal: size.width * 0.05),
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      '${widget.movieDetail.voteAverage.roundToDouble().truncate()}/10',
+                      widget.movieDetail.voteAverage.toStringAsFixed(1),
                       style: FontTheme.body2,
                     ),
                   ),
@@ -102,7 +102,9 @@ class _ScaffoldWidgetState extends State<ScaffoldWidget> {
                     padding:
                         EdgeInsets.symmetric(horizontal: size.width * 0.05),
                     child: Text(
+                      maxLines: 5,
                       widget.movieDetail.overview,
+                      overflow: TextOverflow.ellipsis,
                       style: FontTheme.body2,
                     ),
                   ),

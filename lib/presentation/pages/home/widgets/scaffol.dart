@@ -64,7 +64,12 @@ class MovieCardSection extends StatelessWidget {
           child: ListView(
             scrollDirection: Axis.horizontal,
             children: moviesPopular.results.map((item) {
-              return MovieCard(movie: item);
+              return MovieCard(
+                title: item.title,
+                id: item.id,
+                overview: item.overview,
+                posterPath: item.posterPath,
+              );
             }).toList(),
           ),
         )
