@@ -28,6 +28,7 @@ class _MoviePopularState extends State<MoviePopularWidget> {
           final moviesPopular = state.moviePopular;
 
           return MovieCardSection(
+            height: 240,
             title: 'Popular',
             children: moviesPopular.results.map((item) {
               return MovieCard(

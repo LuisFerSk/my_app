@@ -8,27 +8,32 @@ class MovieCardSection extends StatelessWidget {
     super.key,
     required this.children,
     required this.title,
+    required this.height,
   });
 
   final String title;
   final List<MovieCard> children;
+  final double height;
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Container(
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Text(
             title,
             style: FontTheme.subtitle,
           ),
         ),
+        SizedBox(height: size.height * 0.02),
         Container(
           margin: const EdgeInsets.symmetric(horizontal: 20),
-          height: 200,
+          height: height,
           child: ListView(
             scrollDirection: Axis.horizontal,
             children: children,

@@ -23,6 +23,8 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final injector = Injector.appInstance;
 
+    Size size = MediaQuery.of(context).size;
+
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -41,10 +43,11 @@ class _HomePageState extends State<HomePage> {
           child: Container(
             color: ColorsTheme.backgroundSecondary,
             child: ListView(
-              children: const [
-                MoviePopularWidget(),
-                MovieUpcomingWidget(),
-                MovieTopRatedWidget(),
+              children: [
+                SizedBox(height: size.height * 0.02),
+                const MoviePopularWidget(),
+                const MovieUpcomingWidget(),
+                const MovieTopRatedWidget(),
               ],
             ),
           ),

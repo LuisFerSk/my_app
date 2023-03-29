@@ -28,6 +28,7 @@ class _MovieTopRatedState extends State<MovieTopRatedWidget> {
           final moviesTopRated = state.movieTopRated;
 
           return MovieCardSection(
+            height: 280,
             title: 'Top Rated',
             children: moviesTopRated.results.map((item) {
               return MovieCard(

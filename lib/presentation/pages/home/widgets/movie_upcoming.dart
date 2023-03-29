@@ -28,6 +28,7 @@ class _MovieUpcomingState extends State<MovieUpcomingWidget> {
           final moviesUpcoming = state.movieUpcoming;
 
           return MovieCardSection(
+            height: 240,
             title: 'Upcoming',
             children: moviesUpcoming.results.map((item) {
               return MovieCard(
