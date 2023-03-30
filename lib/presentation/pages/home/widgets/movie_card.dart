@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+import 'package:my_app/core/framework/font.dart';
 import 'package:my_app/presentation/pages/movie/movie_page.dart';
 import 'package:my_app/util/url.dart';
 import 'package:page_transition/page_transition.dart';
@@ -74,20 +76,13 @@ class _MovieCardState extends State<MovieCard> {
               maxLines: 2,
               widget.title,
               overflow: TextOverflow.ellipsis,
-              style: const TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 14,
-              ),
+              style: FontTheme.titleCard,
             ),
             Text(
               maxLines: 2,
               widget.overview,
               overflow: TextOverflow.ellipsis,
-              style: const TextStyle(
-                color: Colors.white54,
-                fontSize: 12,
-              ),
+              style: FontTheme.shortOverviewCard,
             )
           ],
         ),

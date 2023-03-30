@@ -31,8 +31,8 @@ class Dates extends Equatable {
     required this.minimum,
   });
 
-  final DateTime maximum;
-  final DateTime minimum;
+  final String maximum;
+  final String minimum;
 
   @override
   List<Object?> get props => [
@@ -68,7 +68,7 @@ class Result extends Equatable {
   final String overview;
   final double popularity;
   final String posterPath;
-  final DateTime releaseDate;
+  final String releaseDate;
   final String title;
   final bool video;
   final double voteAverage;

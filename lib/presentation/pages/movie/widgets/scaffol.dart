@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/core/framework/colors.dart';
+import 'package:intl/intl.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+
 import 'package:my_app/core/framework/font.dart';
 import 'package:my_app/domain/entities/movie_detail.dart';
 import 'package:my_app/presentation/widgets/appbar.dart';
 import 'package:my_app/util/url.dart';
-import 'package:intl/intl.dart';
+import 'package:my_app/util/status_movie.dart';
 
 class ScaffoldWidget extends StatefulWidget {
   const ScaffoldWidget({
@@ -23,6 +25,10 @@ class _ScaffoldWidgetState extends State<ScaffoldWidget> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
+    final movieDetail = widget.movieDetail;
+
+    final releaseDate = DateTime.tryParse(movieDetail.releaseDate);
+
     return Scaffold(
       appBar: appBar(context),
       body: SafeArea(
@@ -31,7 +37,7 @@ class _ScaffoldWidgetState extends State<ScaffoldWidget> {
           decoration: BoxDecoration(
             image: DecorationImage(
               fit: BoxFit.cover,
-              image: NetworkImage(getUrlImage(widget.movieDetail.posterPath)),
+              image: NetworkImage(getUrlImage(movieDetail.posterPath)),
             ),
           ),
           child: SizedBox(
@@ -56,35 +62,36 @@ class _ScaffoldWidgetState extends State<ScaffoldWidget> {
                         EdgeInsets.symmetric(horizontal: size.width * 0.05),
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      widget.movieDetail.title,
+                      movieDetail.title,
                       style: FontTheme.title,
                     ),
                   ),
                   SizedBox(height: size.height * 0.02),
                   Container(
-                    alignment: Alignment.centerLeft,
                     padding:
                         EdgeInsets.symmetric(horizontal: size.width * 0.05),
                     child: Row(children: [
                       Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5),
-                          color: ColorsTheme.secondary,
+                          color: StatusMovie.getStatusColor(movieDetail.status),
                         ),
                         child: Container(
                           padding: const EdgeInsets.all(5),
                           child: Text(
-                            widget.movieDetail.status,
+                            movieDetail.status,
                             style: FontTheme.bodyBold,
                           ),
                         ),
                       ),
                       SizedBox(width: size.width * 0.03),
                       Text(
-                        DateFormat.yMMMd()
-                            .format(widget.movieDetail.releaseDate),
-                        style: FontTheme.body,
+                        releaseDate != null
+                            ? DateFormat.yMMMd().format(releaseDate)
+                            : '',
+                        style: FontTheme.date,
                       ),
+                      SizedBox(width: size.width * 0.03),
                     ]),
                   ),
                   SizedBox(height: size.height * 0.02),
@@ -92,9 +99,30 @@ class _ScaffoldWidgetState extends State<ScaffoldWidget> {
                     padding:
                         EdgeInsets.symmetric(horizontal: size.width * 0.05),
                     alignment: Alignment.centerLeft,
-                    child: Text(
-                      widget.movieDetail.voteAverage.toStringAsFixed(1),
-                      style: FontTheme.body2,
+                    child: Row(
+                      children: [
+                        RatingBarIndicator(
+                          unratedColor: Colors.white54,
+                          rating: movieDetail.voteAverage / 2,
+                          itemBuilder: (context, index) => const Icon(
+                            Icons.star,
+                            color: Colors.amber,
+                          ),
+                          itemCount: 5,
+                          itemSize: 20,
+                          direction: Axis.horizontal,
+                        ),
+                        const Spacer(),
+                        const Icon(
+                          Icons.thumb_up,
+                          color: Colors.white70,
+                        ),
+                        SizedBox(width: size.width * 0.03),
+                        Text(
+                          movieDetail.popularity.toString(),
+                          style: FontTheme.date,
+                        ),
+                      ],
                     ),
                   ),
                   SizedBox(height: size.height * 0.02),
@@ -103,12 +131,12 @@ class _ScaffoldWidgetState extends State<ScaffoldWidget> {
                         EdgeInsets.symmetric(horizontal: size.width * 0.05),
                     child: Text(
                       maxLines: 5,
-                      widget.movieDetail.overview,
+                      movieDetail.overview,
                       overflow: TextOverflow.ellipsis,
                       style: FontTheme.body2,
                     ),
                   ),
-                  SizedBox(height: size.height * 0.02),
+                  SizedBox(height: size.height * 0.03),
                 ],
               ),
             ),

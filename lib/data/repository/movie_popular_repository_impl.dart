@@ -16,6 +16,14 @@ class MoviePopularRepositoryImpl implements MoviePopularRepository {
       final moviePopular = await service.requestMoviePopular();
 
       return Right(moviePopular);
+    } on ServerErrorException catch (error) {
+      final response = error.response;
+
+      return Left(
+        ServerFailure(
+          message: response.statusMessage,
+        ),
+      );
     } on ServerException catch (error) {
       return Left(
         ServerFailure(

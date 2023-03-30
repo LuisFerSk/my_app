@@ -1,7 +1,8 @@
 import 'package:http/http.dart' as http;
 import 'package:my_app/core/errors/exceptions.dart';
-import 'package:my_app/data/models/movie_popular_model.dart';
+import 'package:my_app/data/models/movie_popular/movie_popular_model.dart';
 import 'package:my_app/util/url.dart';
+import 'package:my_app/data/models/error/error_model.dart';
 
 abstract class MoviePopularServiceType {
   Future<MoviePopularModel> requestMoviePopular();
@@ -22,6 +23,10 @@ class MoviePopularService implements MoviePopularServiceType {
       return moviePopularModelFromJson(response.body);
     }
 
-    throw ServerException();
+    if (response.statusCode == 404 || response.statusCode == 401) {
+      throw ServerErrorException(errorModelFromJson(response.body));
+    }
+
+    throw ServerException(response);
   }
 }
