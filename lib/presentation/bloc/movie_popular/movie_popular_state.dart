@@ -7,8 +7,14 @@ abstract class MoviePopularState extends Equatable {
   List<Object> get props => [];
 }
 
+//
+// Estado que indica que se esta llevando a cabo la consulta de las películas populares.
+//
 class MoviePopularLoading extends MoviePopularState {}
 
+//
+// Estado que indica que se han consultado exitosamente las películas populares.
+//
 class MoviePopularLoaded extends MoviePopularState {
   final MoviePopular moviePopular;
 
@@ -18,6 +24,9 @@ class MoviePopularLoaded extends MoviePopularState {
   List<Object> get props => [moviePopular];
 }
 
+//
+// Estado que indica que ha sucedido un error al momento de intentar consultar las películas populares.
+//
 class MoviePopularError extends MoviePopularState {
   final String message;
 

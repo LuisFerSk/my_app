@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_app/domain/entities/movie_popular.dart';
+import 'package:my_app/presentation/pages/home/widgets/movie_card_section_loading.dart';
 
 import 'package:my_app/presentation/bloc/movie_popular/movie_popular_bloc.dart';
 import 'package:my_app/presentation/pages/home/widgets/movie_card.dart';
-import 'package:my_app/presentation/pages/home/widgets/movie_card_section.dart';
 import 'package:my_app/presentation/widgets/error_message.dart';
-import 'package:my_app/presentation/widgets/loading_indicator.dart';
 
 class MoviePopularWidget extends StatefulWidget {
   const MoviePopularWidget({super.key});
@@ -21,16 +21,16 @@ class _MoviePopularState extends State<MoviePopularWidget> {
       builder: (context, state) {
         if (state is MoviePopularLoading) {
           _getMoviePopular(context);
-          return const LoadingIndicator();
+
+          return const MovieCardSectionLoading(numberItems: 4);
         }
 
         if (state is MoviePopularLoaded) {
-          final moviesPopular = state.moviePopular;
+          MoviePopular moviePopular = state.moviePopular;
 
-          return MovieCardSection(
-            height: 240,
-            title: 'Popular',
-            children: moviesPopular.results.map((item) {
+          return ListView(
+            scrollDirection: Axis.horizontal,
+            children: moviePopular.results.map((item) {
               return MovieCard(
                 title: item.title,
                 id: item.id,
@@ -48,8 +48,9 @@ class _MoviePopularState extends State<MoviePopularWidget> {
           );
         }
 
-        return const Center(
-          child: Text('Error'),
+        return ErrorMessage(
+          message: 'Unexpected error',
+          onPressed: () => _getMoviePopular(context),
         );
       },
     );

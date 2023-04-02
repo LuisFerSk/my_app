@@ -16,7 +16,21 @@ class MovieDetailRepositoryImpl implements MovieDetailRepository {
       final movieDetail = await service.requestMovieDetail(id);
 
       return Right(movieDetail);
+    } on ServerErrorException catch (error) {
+      final response = error.response;
+
+      return Left(
+        ServerFailure(
+          message: response.statusMessage,
+        ),
+      );
     } on ServerException catch (error) {
+      return Left(
+        ServerFailure(
+          message: error.toString(),
+        ),
+      );
+    } catch (error) {
       return Left(
         ServerFailure(
           message: error.toString(),

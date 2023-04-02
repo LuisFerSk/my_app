@@ -5,6 +5,15 @@ import 'package:my_app/presentation/pages/movie/movie_page.dart';
 import 'package:my_app/util/url.dart';
 import 'package:page_transition/page_transition.dart';
 
+//
+// Widget encargado de dibujar una tarjeta con la imagen, titulo y descripción contar de la película,
+// ademas de permitir dar clic para poder ver los detalles de esta.
+//
+// posterPath - path de la imagen del porter de la película
+// id - id de la película
+// title - titulo de la película
+// overview - descripción de la película
+//
 class MovieCard extends StatefulWidget {
   const MovieCard({
     super.key,
@@ -42,7 +51,7 @@ class _MovieCardState extends State<MovieCard> {
                   borderRadius: BorderRadius.circular(10),
                   image: DecorationImage(
                     fit: BoxFit.cover,
-                    image: NetworkImage(getUrlImage(widget.posterPath)),
+                    image: NetworkImage(Url.getImage(widget.posterPath)),
                   ),
                 ),
                 child: Container(

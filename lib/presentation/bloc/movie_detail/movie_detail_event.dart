@@ -7,6 +7,9 @@ abstract class MovieDetailEvent extends Equatable {
   List<Object> get props => [];
 }
 
+//
+// Evento para consultar los detalles de la una película según el id.
+//
 class GetNewMovieDetail extends MovieDetailEvent {
   final int id;
 

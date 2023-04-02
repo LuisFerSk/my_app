@@ -3,8 +3,14 @@ import 'dart:convert';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:my_app/domain/entities/movie_upcoming.dart';
 
-part 'movie_upcoing_model.g.dart';
+part 'movie_upcoming_model.g.dart';
 
+//
+// La función movieUpcomingModelFromJson se encarga de la serialización de un String con formato Json a la
+// clase MovieUpcomingModel.
+//
+// str - string en formato Json
+//
 MovieUpcomingModel movieUpcomingModelFromJson(String str) =>
     MovieUpcomingModel.fromJson(json.decode(str));
 

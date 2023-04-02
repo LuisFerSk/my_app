@@ -7,4 +7,7 @@ abstract class MovieTopRatedEvent extends Equatable {
   List<Object> get props => [];
 }
 
+//
+// Evento para consultar las películas dentro del top rated.
+//
 class GetNewMovieTopRated extends MovieTopRatedEvent {}

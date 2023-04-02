@@ -16,7 +16,21 @@ class MovieTopRatedRepositoryImpl implements MovieTopRatedRepository {
       final movieTopRated = await service.requestMovieTopRated();
 
       return Right(movieTopRated);
+    } on ServerErrorException catch (error) {
+      final response = error.response;
+
+      return Left(
+        ServerFailure(
+          message: response.statusMessage,
+        ),
+      );
     } on ServerException catch (error) {
+      return Left(
+        ServerFailure(
+          message: error.toString(),
+        ),
+      );
+    } catch (error) {
       return Left(
         ServerFailure(
           message: error.toString(),

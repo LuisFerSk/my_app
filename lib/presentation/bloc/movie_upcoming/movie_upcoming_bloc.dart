@@ -8,6 +8,9 @@ import 'package:my_app/domain/usecases/get_movie_upcoming.dart';
 part 'movie_upcoming_event.dart';
 part 'movie_upcoming_state.dart';
 
+//
+// BLoC para el manejo de lógica empresaria para las películas próximas a estrenarse.
+//
 class MovieUpcomingBloc extends Bloc<MovieUpcomingEvent, MovieUpcomingState> {
   final GetMovieUpcoming getMovieUpcoming;
 
@@ -33,7 +36,7 @@ class MovieUpcomingBloc extends Bloc<MovieUpcomingEvent, MovieUpcomingState> {
   String _mapFailureToMessage(Failure failure) {
     switch (failure.runtimeType) {
       case ServerFailure:
-        return 'Ha ocurrido un error, por favor intenta nuevamente.';
+        return failure.message;
       default:
         return 'Unexpected error';
     }

@@ -9,6 +9,9 @@ import 'package:my_app/domain/usecases/get_movie_top_rated.dart';
 part 'movie_top_rated_event.dart';
 part 'movie_top_rated_state.dart';
 
+//
+// BLoC para el manejo de lógica empresaria para las películas dentro del top rated.
+//
 class MovieTopRatedBloc extends Bloc<MovieTopRatedEvent, MovieTopRatedState> {
   final GetMovieTopRated getMovieTopRated;
 
@@ -34,7 +37,7 @@ class MovieTopRatedBloc extends Bloc<MovieTopRatedEvent, MovieTopRatedState> {
   String _mapFailureToMessage(Failure failure) {
     switch (failure.runtimeType) {
       case ServerFailure:
-        return 'Ha ocurrido un error, por favor intenta nuevamente.';
+        return failure.message;
       default:
         return 'Unexpected error';
     }

@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injector/injector.dart';
+import 'package:my_app/core/framework/colors.dart';
 
 import 'package:my_app/presentation/bloc/movie_detail/movie_detail_bloc.dart';
 import 'package:my_app/presentation/pages/movie/widgets/scaffol.dart';
 import 'package:my_app/presentation/widgets/error_message.dart';
 import 'package:my_app/presentation/widgets/loading_indicator.dart';
+import 'package:my_app/presentation/widgets/appbar.dart';
 
+//
+// Widget principal en donde se construye el BLoC y aplicar la lógica empresaria.
+//
 class MoviePage extends StatefulWidget {
   const MoviePage({super.key, required this.id});
 
@@ -36,7 +41,9 @@ class _MoviePageState extends State<MoviePage> {
     if (state is MovieDetailLoading) {
       _getMovieDetail(context);
 
-      return const LoadingIndicator();
+      return const _BackgroundWidget(
+        child: LoadingIndicator(),
+      );
     }
 
     if (state is MovieDetailLoaded) {
@@ -46,9 +53,11 @@ class _MoviePageState extends State<MoviePage> {
     }
 
     if (state is MovieDetailError) {
-      return ErrorMessage(
-        message: state.message,
-        onPressed: () => _getMovieDetail(context),
+      return _BackgroundWidget(
+        child: ErrorMessage(
+          message: state.message,
+          onPressed: () => _getMovieDetail(context),
+        ),
       );
     }
 
@@ -60,5 +69,25 @@ class _MoviePageState extends State<MoviePage> {
   void _getMovieDetail(BuildContext context) {
     final movieDetailBloc = context.read<MovieDetailBloc>();
     movieDetailBloc.add(GetNewMovieDetail(widget.id));
+  }
+}
+
+class _BackgroundWidget extends StatelessWidget {
+  const _BackgroundWidget({required this.child});
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: appBar(context),
+      body: SafeArea(
+        child: Container(
+          width: double.infinity,
+          color: ColorsTheme.backgroundSecondary,
+          child: child,
+        ),
+      ),
+    );
   }
 }

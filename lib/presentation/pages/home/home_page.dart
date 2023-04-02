@@ -6,6 +6,7 @@ import 'package:my_app/core/framework/colors.dart';
 import 'package:my_app/presentation/bloc/movie_popular/movie_popular_bloc.dart';
 import 'package:my_app/presentation/bloc/movie_top_rated/movie_top_rated_bloc.dart';
 import 'package:my_app/presentation/bloc/movie_upcoming/movie_upcoming_bloc.dart';
+import 'package:my_app/presentation/pages/home/widgets/movie_card_section.dart';
 import 'package:my_app/presentation/pages/home/widgets/movie_popular.dart';
 import 'package:my_app/presentation/pages/home/widgets/movie_upcoming.dart';
 import 'package:my_app/presentation/pages/home/widgets/movie_top_rated.dart';
@@ -45,9 +46,21 @@ class _HomePageState extends State<HomePage> {
             child: ListView(
               children: [
                 SizedBox(height: size.height * 0.02),
-                const MoviePopularWidget(),
-                const MovieUpcomingWidget(),
-                const MovieTopRatedWidget(),
+                const MovieCardSection(
+                  title: 'Popular',
+                  height: 240,
+                  child: MoviePopularWidget(),
+                ),
+                const MovieCardSection(
+                  height: 240,
+                  title: 'Upcoming',
+                  child: MovieUpcomingWidget(),
+                ),
+                const MovieCardSection(
+                  height: 280,
+                  title: 'Top Rated',
+                  child: MovieTopRatedWidget(),
+                ),
               ],
             ),
           ),

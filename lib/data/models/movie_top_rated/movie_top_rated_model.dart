@@ -5,6 +5,12 @@ import 'package:my_app/domain/entities/movie_top_rated.dart';
 
 part 'movie_top_rated_model.g.dart';
 
+//
+// La función movieTopRatedModelFromJson se encarga de la serialización de un String con formato Json a la
+// clase MovieTopRatedModel.
+//
+// str - string en formato Json
+//
 MovieTopRatedModel movieTopRatedModelFromJson(String str) =>
     MovieTopRatedModel.fromJson(json.decode(str));
 

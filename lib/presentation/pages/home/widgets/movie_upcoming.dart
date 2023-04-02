@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_app/domain/entities/movie_upcoming.dart';
+import 'package:my_app/presentation/pages/home/widgets/movie_card_section_loading.dart';
 
-import 'package:my_app/presentation/pages/home/widgets/movie_card_section.dart';
 import 'package:my_app/presentation/bloc/movie_upcoming/movie_upcoming_bloc.dart';
 import 'package:my_app/presentation/pages/home/widgets/movie_card.dart';
 import 'package:my_app/presentation/widgets/error_message.dart';
-import 'package:my_app/presentation/widgets/loading_indicator.dart';
 
 class MovieUpcomingWidget extends StatefulWidget {
   const MovieUpcomingWidget({super.key});
@@ -21,16 +21,16 @@ class _MovieUpcomingState extends State<MovieUpcomingWidget> {
       builder: (context, state) {
         if (state is MovieUpcomingLoading) {
           _getMovieUpcoming(context);
-          return const LoadingIndicator();
+
+          return const MovieCardSectionLoading(numberItems: 4);
         }
 
         if (state is MovieUpcomingLoaded) {
-          final moviesUpcoming = state.movieUpcoming;
+          MovieUpcoming movieUpcoming = state.movieUpcoming;
 
-          return MovieCardSection(
-            height: 240,
-            title: 'Upcoming',
-            children: moviesUpcoming.results.map((item) {
+          return ListView(
+            scrollDirection: Axis.horizontal,
+            children: movieUpcoming.results.map((item) {
               return MovieCard(
                 title: item.title,
                 id: item.id,
@@ -48,8 +48,9 @@ class _MovieUpcomingState extends State<MovieUpcomingWidget> {
           );
         }
 
-        return const Center(
-          child: Text('Error'),
+        return ErrorMessage(
+          message: 'Unexpected error',
+          onPressed: () => _getMovieUpcoming(context),
         );
       },
     );

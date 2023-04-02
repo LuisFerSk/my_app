@@ -4,6 +4,7 @@ import 'package:my_app/presentation/pages/home/home_page.dart';
 import 'package:my_app/di/injection_container.dart';
 
 void app() {
+  // Inicialización de las inyecciones de dependencias.
   InjectionContainer.init();
 
   runApp(const MyApp());

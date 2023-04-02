@@ -16,7 +16,21 @@ class MovieUpcomingRepositoryImpl implements MovieUpcomingRepository {
       final movieUpcoming = await service.requestMovieUpcoming();
 
       return Right(movieUpcoming);
+    } on ServerErrorException catch (error) {
+      final response = error.response;
+
+      return Left(
+        ServerFailure(
+          message: response.statusMessage,
+        ),
+      );
     } on ServerException catch (error) {
+      return Left(
+        ServerFailure(
+          message: error.toString(),
+        ),
+      );
+    } catch (error) {
       return Left(
         ServerFailure(
           message: error.toString(),

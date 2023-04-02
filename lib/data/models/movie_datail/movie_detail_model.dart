@@ -4,9 +4,17 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'movie_detail_model.g.dart';
 
+//
+// Función encarga de la serialización de un String con formato Json a la clase MovieDetailModel.
+//
+// str - string en formato Json
+//
 MovieDetailModel movieDetailFromJson(String str) =>
     MovieDetailModel.fromJson(json.decode(str));
 
+//
+// Modelo de la entidad MovieDetail usado para realizar la serialización.
+//
 @JsonSerializable(explicitToJson: true)
 class MovieDetailModel extends MovieDetail {
   MovieDetailModel({
@@ -48,7 +56,7 @@ class MovieDetailModel extends MovieDetail {
           originalLanguage: newOriginalLanguage ?? '',
           originalTitle: newOriginalTitle ?? '',
           overview: newOverview ?? '',
-          popularity: newPopularity ?? -1,
+          popularity: newPopularity ?? double.nan,
           posterPath: newPosterPath ?? '',
           productionCompanies: newProductionCompanies ?? [],
           productionCountries: newProductionCountries ?? [],
@@ -60,7 +68,7 @@ class MovieDetailModel extends MovieDetail {
           tagline: newTagline ?? '',
           title: newTitle ?? '',
           video: newVideo ?? false,
-          voteAverage: newVoteAverage ?? -1,
+          voteAverage: newVoteAverage ?? double.nan,
           voteCount: newVoteCount ?? -1,
         );
 

@@ -30,6 +30,12 @@ class MoviePopularRepositoryImpl implements MoviePopularRepository {
           message: error.toString(),
         ),
       );
+    } catch (error) {
+      return Left(
+        ServerFailure(
+          message: error.toString(),
+        ),
+      );
     }
   }
 }

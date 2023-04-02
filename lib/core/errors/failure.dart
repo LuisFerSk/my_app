@@ -1,5 +1,10 @@
 import 'package:equatable/equatable.dart';
 
+//
+// Clase base de todos los failure de la app.
+//
+// message - mensaje de error
+//
 abstract class Failure extends Equatable {
   final String message;
 
@@ -11,7 +16,9 @@ abstract class Failure extends Equatable {
   List<Object> get props => [message];
 }
 
-// Failures generales de la app
+//
+// Clase general para encapsular todas los errores provenientes de los servicios.
+//
 class ServerFailure extends Failure {
   const ServerFailure({required String message}) : super(message: message);
 }

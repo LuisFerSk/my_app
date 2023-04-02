@@ -5,6 +5,12 @@ import 'package:my_app/domain/entities/movie_popular.dart';
 
 part 'movie_popular_model.g.dart';
 
+//
+// La función moviePopularModelFromJson se encarga de la serialización de un String con formato Json a la
+// clase MoviePopularModel.
+//
+// str - string en formato Json
+//
 MoviePopularModel moviePopularModelFromJson(String str) =>
     MoviePopularModel.fromJson(json.decode(str));
 

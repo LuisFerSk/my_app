@@ -9,6 +9,9 @@ import 'package:my_app/domain/usecases/get_movie_detail.dart';
 part 'movie_detail_event.dart';
 part 'movie_detail_state.dart';
 
+//
+// BLoC para el manejo de lógica empresaria para los detalles de películas.
+//
 class MovieDetailBloc extends Bloc<MovieDetailEvent, MovieDetailState> {
   final GetMovieDetail getMovieDetail;
 
@@ -34,7 +37,7 @@ class MovieDetailBloc extends Bloc<MovieDetailEvent, MovieDetailState> {
   String _mapFailureToMessage(Failure failure) {
     switch (failure.runtimeType) {
       case ServerFailure:
-        return 'Ha ocurrido un error, por favor intenta nuevamente.';
+        return failure.message;
       default:
         return 'Unexpected error';
     }

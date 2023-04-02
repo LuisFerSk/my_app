@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+//
+// Clase para almacenar todos los TextStyle necesarios para la app.
+//
 class FontTheme {
   static const fontFamily = 'Mplus 1p Black';
 
@@ -53,5 +56,6 @@ class FontTheme {
         color: Colors.white,
         fontSize: 20,
         fontFamily: fontFamily,
+        fontWeight: FontWeight.bold,
       );
 }

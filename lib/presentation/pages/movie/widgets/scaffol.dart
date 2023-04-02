@@ -25,9 +25,9 @@ class _ScaffoldWidgetState extends State<ScaffoldWidget> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
-    final movieDetail = widget.movieDetail;
+    MovieDetail movieDetail = widget.movieDetail;
 
-    final releaseDate = DateTime.tryParse(movieDetail.releaseDate);
+    DateTime? releaseDate = DateTime.tryParse(movieDetail.releaseDate);
 
     return Scaffold(
       appBar: appBar(context),
@@ -37,7 +37,13 @@ class _ScaffoldWidgetState extends State<ScaffoldWidget> {
           decoration: BoxDecoration(
             image: DecorationImage(
               fit: BoxFit.cover,
-              image: NetworkImage(getUrlImage(movieDetail.posterPath)),
+              image: Image.network(
+                Url.getImage(movieDetail.posterPath),
+                errorBuilder: (BuildContext context, Object exception,
+                    StackTrace? stackTrace) {
+                  return const Text('ð¢');
+                },
+              ).image,
             ),
           ),
           child: SizedBox(

@@ -6,6 +6,10 @@ import 'package:my_app/domain/repositories/movie_detail_repository.dart';
 import 'package:my_app/domain/usecases/get_movie_detail.dart';
 import 'package:my_app/presentation/bloc/movie_detail/movie_detail_bloc.dart';
 
+//
+// La clase MovieDetailInjection es usada para establecer la inyección de dependencia de las clases
+// necesarias para el usecases GetMovieDetail junto a su modelo BLoc.
+//
 class MovieDetailInjection {
   static void init() {
     final injector = Injector.appInstance;

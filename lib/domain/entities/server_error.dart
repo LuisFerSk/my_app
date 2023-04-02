@@ -1,11 +1,10 @@
 import 'package:equatable/equatable.dart';
 
 /*
-/ 
+/ La ServerError representa los errores 401 y 404 lanzados por la api.
 */
-
-class ErrorEntities extends Equatable {
-  const ErrorEntities({
+class ServerError extends Equatable {
+  const ServerError({
     required this.statusCode,
     required this.statusMessage,
     required this.success,

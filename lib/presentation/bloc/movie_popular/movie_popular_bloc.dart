@@ -9,6 +9,9 @@ import 'package:my_app/domain/usecases/get_movie_popular.dart';
 part 'movie_popular_event.dart';
 part 'movie_popular_state.dart';
 
+//
+// BLoC para el manejo de lógica empresaria para las películas populares.
+//
 class MoviePopularBloc extends Bloc<MoviePopularEvent, MoviePopularState> {
   final GetMoviePopular getMoviePopular;
 
@@ -34,7 +37,7 @@ class MoviePopularBloc extends Bloc<MoviePopularEvent, MoviePopularState> {
   String _mapFailureToMessage(Failure failure) {
     switch (failure.runtimeType) {
       case ServerFailure:
-        return 'Ha ocurrido un error, por favor intenta nuevamente.';
+        return failure.message;
       default:
         return 'Unexpected error';
     }
